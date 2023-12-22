@@ -6,7 +6,7 @@ use App\Events\AchievementUnlocked;
 use App\Models\Achievement;
 use App\Models\Comment;
 
-class UnlockCommentAchievement
+class UnlockCommentWrittenAchievement
 {
     public function __construct()
     {
@@ -28,11 +28,11 @@ class UnlockCommentAchievement
             ->where('requirement', '=', $userCommentsCount)
             ->first();
 
-        $user->unlockedAchievements()->create([
-            'achievement_id' => $achievementToUnlock->id,
-        ]);
+        if ($achievementToUnlock?->exists()) {
+            $user->unlockedAchievements()->create([
+                'achievement_id' => $achievementToUnlock->id,
+            ]);
 
-        if ($achievementToUnlock->exists()) {
             AchievementUnlocked::dispatch($achievementToUnlock->name, $user);
         }
     }

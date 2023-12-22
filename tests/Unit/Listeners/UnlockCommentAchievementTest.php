@@ -4,7 +4,7 @@ namespace Tests\Unit\Listeners;
 
 use App\Events\AchievementUnlocked;
 use App\Events\CommentWritten;
-use App\Listeners\UnlockCommentAchievement;
+use App\Listeners\UnlockCommentWrittenAchievement;
 use App\Models\Achievement;
 use App\Models\Comment;
 use App\Models\User;
@@ -20,7 +20,7 @@ class UnlockCommentAchievementTest extends TestCase
 
         Event::assertListening(
             CommentWritten::class,
-            UnlockCommentAchievement::class
+            UnlockCommentWrittenAchievement::class
         );
     }
 
@@ -32,6 +32,7 @@ class UnlockCommentAchievementTest extends TestCase
         $user = User::factory()->create();
 
         Achievement::query()
+            ->select('id', 'requirement', 'name')
             ->where('category', '=', 'Comments Written')
             ->orderBy('requirement')
             ->each(function (Achievement $achievement) use ($user) {
@@ -41,7 +42,7 @@ class UnlockCommentAchievementTest extends TestCase
 
                 $event = new CommentWritten($comment);
 
-                $listener = new UnlockCommentAchievement();
+                $listener = new UnlockCommentWrittenAchievement();
                 $listener->handle($event);
 
                 $this->assertDatabaseHas('unlocked_achievements', [
