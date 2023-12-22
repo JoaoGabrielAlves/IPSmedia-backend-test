@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
@@ -16,6 +15,7 @@ use Illuminate\Support\Carbon;
  * @property int $requirement
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Badge newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Badge newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Badge query()
@@ -25,6 +25,7 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|Badge whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Badge whereRequirement($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Badge whereUpdatedAt($value)
+ *
  * @mixin Eloquent
  */
 class Badge extends Model

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
@@ -15,6 +14,7 @@ use Illuminate\Support\Carbon;
  * @property int $achievement_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|UnlockedAchievement newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UnlockedAchievement newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UnlockedAchievement query()
@@ -23,6 +23,7 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|UnlockedAchievement whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UnlockedAchievement whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UnlockedAchievement whereUserId($value)
+ *
  * @mixin Eloquent
  */
 class UnlockedAchievement extends Model
