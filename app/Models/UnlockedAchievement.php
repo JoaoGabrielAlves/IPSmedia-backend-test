@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
 /**
@@ -29,4 +30,9 @@ use Illuminate\Support\Carbon;
 class UnlockedAchievement extends Model
 {
     protected $guarded = [];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Badge;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class BadgeSeeder extends Seeder
@@ -29,7 +28,7 @@ class BadgeSeeder extends Seeder
             [
                 'name' => '10 Achievements',
                 'requirement' => 10,
-            ]
+            ],
         ];
 
         Badge::query()->upsert($badges, 'name');
