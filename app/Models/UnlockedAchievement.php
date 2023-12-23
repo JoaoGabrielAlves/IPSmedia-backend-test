@@ -25,6 +25,9 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|UnlockedAchievement whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UnlockedAchievement whereUserId($value)
  *
+ * @property-read Achievement|null $achievement
+ * @property-read User|null $user
+ *
  * @mixin Eloquent
  */
 class UnlockedAchievement extends Model

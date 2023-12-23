@@ -28,7 +28,7 @@ use Laravel\Sanctum\PersonalAccessToken;
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Collection<int, \App\Models\Comment> $comments
+ * @property-read Collection<int, Comment> $comments
  * @property-read int|null $comments_count
  * @property-read Collection<int, Lesson> $lessons
  * @property-read int|null $lessons_count
@@ -51,6 +51,12 @@ use Laravel\Sanctum\PersonalAccessToken;
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ *
+ * @property-read Badge|null $badge
+ * @property-read Collection<int, UnlockedAchievement> $unlockedAchievements
+ * @property-read int|null $unlocked_achievements_count
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereBadgeId($value)
  *
  * @mixin Eloquent
  */

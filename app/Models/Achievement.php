@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\AchievementCategoryEnum;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -38,4 +39,9 @@ class Achievement extends Model
     protected $casts = [
         'category' => AchievementCategoryEnum::class,
     ];
+
+    public function unlockedAchievements(): HasMany
+    {
+        return $this->hasMany(UnlockedAchievement::class);
+    }
 }
