@@ -75,4 +75,90 @@ class UnlockLessonWatchedAchievementTest extends TestCase
                 });
             });
     }
+
+    /** @test */
+    public function it_should_not_unlock_achievement_if_requirement_is_not_met()
+    {
+        Event::fake();
+
+        $user = User::factory()->create();
+
+        $lessons = Lesson::query()
+            ->select('id')
+            ->limit(2)
+            ->get()
+            ->pluck('id')
+            ->mapWithKeys(function (int $id) {
+                return [$id => ['watched' => true]];
+            })
+            ->toArray();
+
+        $user->lessons()->attach($lessons);
+
+        $lesson = $user->watched()->latest()->first();
+
+        $event = new LessonWatched($lesson, $user);
+
+        $listener = new UnlockLessonWatchedAchievement();
+        $listener->handle($event);
+
+        $this->assertDatabaseEmpty('unlocked_achievements');
+
+        Event::assertNotDispatched(AchievementUnlocked::class);
+    }
+
+    /** @test */
+    public function it_should_not_create_an_duplicate_if_achievement_is_already_unlocked()
+    {
+        Event::fake();
+
+        $user = User::factory()->create();
+
+        $lesson = Lesson::query()->first();
+
+        $user->lessons()->attach($lesson, ['watched' => true]);
+
+        $event = new LessonWatched($lesson, $user);
+
+        $listener = new UnlockLessonWatchedAchievement();
+        $listener->handle($event);
+
+        $listener = new UnlockLessonWatchedAchievement();
+        $listener->handle($event);
+
+        $achievement = Achievement::query()
+            ->select('id', 'requirement', 'name')
+            ->where('category', '=', 'Lessons watched')
+            ->orderBy('requirement')
+            ->first();
+
+        $this->assertDatabaseCount('unlocked_achievements', 1);
+
+        Event::assertDispatched(AchievementUnlocked::class, 1);
+
+        Event::assertDispatched(AchievementUnlocked::class, function (AchievementUnlocked $event) use ($achievement, $user) {
+            return $event->achievementName === $achievement->name && $event->user->is($user);
+        });
+    }
+
+    /** @test */
+    public function it_should_not_unlock_achievement_if_lesson_is_not_watched()
+    {
+        Event::fake();
+
+        $user = User::factory()->create();
+
+        $lesson = Lesson::query()->first();
+
+        $user->lessons()->attach($lesson);
+
+        $event = new LessonWatched($lesson, $user);
+
+        $listener = new UnlockLessonWatchedAchievement();
+        $listener->handle($event);
+
+        $this->assertDatabaseEmpty('unlocked_achievements');
+
+        Event::assertNotDispatched(AchievementUnlocked::class);
+    }
 }

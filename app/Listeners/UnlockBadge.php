@@ -8,11 +8,6 @@ use App\Models\User;
 
 class UnlockBadge
 {
-    public function __construct()
-    {
-
-    }
-
     public function handle(object $event): void
     {
         /** @var User $User */

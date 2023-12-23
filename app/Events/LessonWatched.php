@@ -13,6 +13,5 @@ class LessonWatched
 
     public function __construct(public Lesson $lesson, public User $user)
     {
-
     }
 }

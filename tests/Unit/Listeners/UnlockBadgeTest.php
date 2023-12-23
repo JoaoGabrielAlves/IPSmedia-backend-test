@@ -75,7 +75,7 @@ class UnlockBadgeTest extends TestCase
     }
 
     /** @test */
-    public function it_should_not_change_user_badge_if_badge_is_not_unlocked(): void
+    public function it_should_not_change_user_badge_if_no_requirement_is_met(): void
     {
         Event::fake();
 

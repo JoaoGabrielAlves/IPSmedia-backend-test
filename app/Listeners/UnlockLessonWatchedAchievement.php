@@ -2,17 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Events\AchievementUnlocked;
+use App\Actions\UnlockAchievement;
 use App\Models\Achievement;
 use App\Models\User;
 
 class UnlockLessonWatchedAchievement
 {
-    public function __construct()
-    {
-
-    }
-
     public function handle(object $event): void
     {
         /* @var User $user */
@@ -29,11 +24,7 @@ class UnlockLessonWatchedAchievement
             ->first();
 
         if ($achievementToUnlock) {
-            $user->unlockedAchievements()->create([
-                'achievement_id' => $achievementToUnlock->id,
-            ]);
-
-            AchievementUnlocked::dispatch($achievementToUnlock->name, $user);
+            UnlockAchievement::handle($achievementToUnlock, $user);
         }
     }
 }
