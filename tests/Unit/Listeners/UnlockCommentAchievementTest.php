@@ -54,7 +54,7 @@ class UnlockCommentAchievementTest extends TestCase
                 Comment::query()->delete();
 
                 Event::assertDispatched(AchievementUnlocked::class, function (AchievementUnlocked $event) use ($achievement, $user) {
-                    return $event->achievementName === $achievement->name && $event->user->is($user);
+                    return $event->achievement_name === $achievement->name && $event->user->is($user);
                 });
             });
     }
@@ -110,7 +110,7 @@ class UnlockCommentAchievementTest extends TestCase
         Event::assertDispatched(AchievementUnlocked::class, 1);
 
         Event::assertDispatched(AchievementUnlocked::class, function (AchievementUnlocked $event) use ($achievement, $user) {
-            return $event->achievementName === $achievement->name && $event->user->is($user);
+            return $event->achievement_name === $achievement->name && $event->user->is($user);
         });
     }
 }

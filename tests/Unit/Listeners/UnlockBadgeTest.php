@@ -69,7 +69,7 @@ class UnlockBadgeTest extends TestCase
                 $user->unlockedAchievements()->delete();
 
                 Event::assertDispatched(BadgeUnlocked::class, function (BadgeUnlocked $event) use ($badge, $user) {
-                    return $event->badgeName === $badge->name && $event->user->id === $user->id;
+                    return $event->badge_name === $badge->name && $event->user->id === $user->id;
                 });
             });
     }

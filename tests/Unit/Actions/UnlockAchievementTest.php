@@ -23,7 +23,7 @@ class UnlockAchievementTest extends TestCase
         UnlockAchievement::handle($achievement, $user);
 
         Event::assertDispatched(AchievementUnlocked::class, function ($event) use ($achievement, $user) {
-            return $event->achievementName === $achievement->name
+            return $event->achievement_name === $achievement->name
                 && $event->user->is($user);
         });
     }
@@ -41,7 +41,7 @@ class UnlockAchievementTest extends TestCase
         UnlockAchievement::handle($achievement, $user);
 
         Event::assertDispatched(AchievementUnlocked::class, function ($event) use ($achievement, $user) {
-            return $event->achievementName === $achievement->name
+            return $event->achievement_name === $achievement->name
                 && $event->user->is($user);
         });
 

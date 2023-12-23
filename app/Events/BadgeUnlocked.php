@@ -11,7 +11,7 @@ class BadgeUnlocked
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public function __construct(public string $badgeName, public User $user)
+    public function __construct(public string $badge_name, public User $user)
     {
     }
 }
