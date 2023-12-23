@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\AchievementCategoryEnum;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -33,4 +34,8 @@ use Illuminate\Support\Carbon;
 class Achievement extends Model
 {
     protected $guarded = [];
+
+    protected $casts = [
+        'category' => AchievementCategoryEnum::class,
+    ];
 }

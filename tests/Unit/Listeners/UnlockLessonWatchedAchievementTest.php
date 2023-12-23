@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Listeners;
 
+use App\Enums\AchievementCategoryEnum;
 use App\Events\AchievementUnlocked;
 use App\Events\LessonWatched;
 use App\Listeners\UnlockLessonWatchedAchievement;
@@ -33,7 +34,7 @@ class UnlockLessonWatchedAchievementTest extends TestCase
 
         $achievementWithBiggestRequirement = Achievement::query()
             ->select('id', 'requirement', 'name')
-            ->where('category', '=', 'Lessons watched')
+            ->where('category', '=', AchievementCategoryEnum::LESSONS_WATCHED)
             ->orderByDesc('requirement')
             ->first();
 
@@ -41,7 +42,7 @@ class UnlockLessonWatchedAchievementTest extends TestCase
 
         Achievement::query()
             ->select('id', 'requirement', 'name')
-            ->where('category', '=', 'Lessons watched')
+            ->where('category', '=', AchievementCategoryEnum::LESSONS_WATCHED)
             ->orderBy('requirement')
             ->each(function (Achievement $achievement) use ($user) {
                 $lessons = Lesson::query()
@@ -128,7 +129,7 @@ class UnlockLessonWatchedAchievementTest extends TestCase
 
         $achievement = Achievement::query()
             ->select('id', 'requirement', 'name')
-            ->where('category', '=', 'Lessons watched')
+            ->where('category', '=', AchievementCategoryEnum::LESSONS_WATCHED)
             ->orderBy('requirement')
             ->first();
 

@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Listeners;
 
+use App\Enums\AchievementCategoryEnum;
 use App\Events\AchievementUnlocked;
 use App\Events\CommentWritten;
 use App\Listeners\UnlockCommentWrittenAchievement;
@@ -33,7 +34,7 @@ class UnlockCommentAchievementTest extends TestCase
 
         Achievement::query()
             ->select('id', 'requirement', 'name')
-            ->where('category', '=', 'Comments Written')
+            ->where('category', '=', AchievementCategoryEnum::COMMENTS_WRITTEN)
             ->orderBy('requirement')
             ->each(function (Achievement $achievement) use ($user) {
                 Comment::factory()->for($user)->count($achievement->requirement)->create();
@@ -100,7 +101,7 @@ class UnlockCommentAchievementTest extends TestCase
 
         $achievement = Achievement::query()
             ->select('id', 'requirement', 'name')
-            ->where('category', '=', 'Comments Written')
+            ->where('category', '=', AchievementCategoryEnum::COMMENTS_WRITTEN)
             ->orderBy('requirement')
             ->first();
 

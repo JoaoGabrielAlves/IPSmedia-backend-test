@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Actions\UnlockAchievement;
+use App\Enums\AchievementCategoryEnum;
 use App\Models\Achievement;
 use App\Models\Comment;
 
@@ -19,7 +20,7 @@ class UnlockCommentWrittenAchievement
 
         $achievementToUnlock = Achievement::query()
             ->select('name', 'id')
-            ->where('category', '=', 'Comments Written')
+            ->where('category', '=', AchievementCategoryEnum::COMMENTS_WRITTEN)
             ->where('requirement', '=', $userCommentsCount)
             ->first();
 

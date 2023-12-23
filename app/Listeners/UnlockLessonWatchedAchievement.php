@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Actions\UnlockAchievement;
+use App\Enums\AchievementCategoryEnum;
 use App\Models\Achievement;
 use App\Models\User;
 
@@ -19,7 +20,7 @@ class UnlockLessonWatchedAchievement
 
         $achievementToUnlock = Achievement::query()
             ->select('name', 'id')
-            ->where('category', '=', 'Lessons watched')
+            ->where('category', '=', AchievementCategoryEnum::LESSONS_WATCHED)
             ->where('requirement', '=', $watchedLessonsCount)
             ->first();
 
