@@ -28,7 +28,7 @@ class UnlockCommentWrittenAchievement
             ->where('requirement', '=', $userCommentsCount)
             ->first();
 
-        if ($achievementToUnlock?->exists()) {
+        if ($achievementToUnlock) {
             $user->unlockedAchievements()->create([
                 'achievement_id' => $achievementToUnlock->id,
             ]);

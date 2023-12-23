@@ -5,6 +5,7 @@ namespace App\Models;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,6 +20,7 @@ use Laravel\Sanctum\PersonalAccessToken;
  * App\Models\User
  *
  * @property int $id
+ * @property int $badge_id
  * @property string $name
  * @property string $email
  * @property Carbon|null $email_verified_at
@@ -90,5 +92,10 @@ class User extends Authenticatable
     public function unlockedAchievements(): HasMany
     {
         return $this->hasMany(UnlockedAchievement::class);
+    }
+
+    public function badge(): BelongsTo
+    {
+        return $this->belongsTo(Badge::class);
     }
 }
