@@ -13,7 +13,7 @@ use Tests\TestCase;
 class IndexTest extends TestCase
 {
     /** @test */
-    public function it_should_return_expected_data_with_all_data()
+    public function it_should_return_expected_response()
     {
         $user = User::factory()->create();
 
@@ -46,7 +46,7 @@ class IndexTest extends TestCase
     }
 
     /** @test */
-    public function it_should_return_empty_unlocked_achievements_if_not_achievements_unlocked()
+    public function it_should_return_empty_unlocked_achievements_if_no_achievements_unlocked()
     {
         $user = User::factory()->create();
 
