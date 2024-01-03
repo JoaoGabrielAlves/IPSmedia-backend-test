@@ -5,7 +5,6 @@ namespace App\Listeners;
 use App\Events\AchievementUnlocked;
 use App\Events\BadgeUnlocked;
 use App\Models\Badge;
-use App\Models\User;
 
 class UnlockBadge
 {

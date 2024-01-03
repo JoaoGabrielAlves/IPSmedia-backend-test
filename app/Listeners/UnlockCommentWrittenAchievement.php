@@ -5,9 +5,7 @@ namespace App\Listeners;
 use App\Actions\UnlockAchievement;
 use App\Enums\AchievementCategoryEnum;
 use App\Events\CommentWritten;
-use App\Events\LessonWatched;
 use App\Models\Achievement;
-use App\Models\Comment;
 
 class UnlockCommentWrittenAchievement
 {
