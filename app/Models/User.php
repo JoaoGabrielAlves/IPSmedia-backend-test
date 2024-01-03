@@ -80,26 +80,41 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    /**
+     * @return HasMany<Comment>
+     */
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
     }
 
+    /**
+     * @return BelongsToMany<Lesson>
+     */
     public function lessons(): BelongsToMany
     {
         return $this->belongsToMany(Lesson::class);
     }
 
+    /**
+     * @return BelongsToMany<Lesson>
+     */
     public function watched(): BelongsToMany
     {
         return $this->belongsToMany(Lesson::class)->wherePivot('watched', true);
     }
 
+    /**
+     * @return HasMany<UnlockedAchievement>
+     */
     public function unlockedAchievements(): HasMany
     {
         return $this->hasMany(UnlockedAchievement::class);
     }
 
+    /**
+     * @return BelongsTo<Badge, User>
+     */
     public function badge(): BelongsTo
     {
         return $this->belongsTo(Badge::class);

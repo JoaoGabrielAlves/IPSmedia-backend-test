@@ -40,6 +40,9 @@ class Achievement extends Model
         'category' => AchievementCategoryEnum::class,
     ];
 
+    /**
+     * @return HasMany<UnlockedAchievement>
+     */
     public function unlockedAchievements(): HasMany
     {
         return $this->hasMany(UnlockedAchievement::class);

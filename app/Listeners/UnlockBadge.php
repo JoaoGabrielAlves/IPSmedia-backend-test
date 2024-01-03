@@ -2,15 +2,15 @@
 
 namespace App\Listeners;
 
+use App\Events\AchievementUnlocked;
 use App\Events\BadgeUnlocked;
 use App\Models\Badge;
 use App\Models\User;
 
 class UnlockBadge
 {
-    public function handle(object $event): void
+    public function handle(AchievementUnlocked $event): void
     {
-        /** @var User $User */
         $user = $event->user;
 
         $unlockedAchievementCount = $user->unlockedAchievements()->count();

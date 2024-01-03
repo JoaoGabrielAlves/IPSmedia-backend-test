@@ -4,14 +4,14 @@ namespace App\Listeners;
 
 use App\Actions\UnlockAchievement;
 use App\Enums\AchievementCategoryEnum;
+use App\Events\LessonWatched;
 use App\Models\Achievement;
 use App\Models\User;
 
 class UnlockLessonWatchedAchievement
 {
-    public function handle(object $event): void
+    public function handle(LessonWatched $event): void
     {
-        /* @var User $user */
         $user = $event->user;
 
         $user->refresh();

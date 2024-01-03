@@ -4,14 +4,15 @@ namespace App\Listeners;
 
 use App\Actions\UnlockAchievement;
 use App\Enums\AchievementCategoryEnum;
+use App\Events\CommentWritten;
+use App\Events\LessonWatched;
 use App\Models\Achievement;
 use App\Models\Comment;
 
 class UnlockCommentWrittenAchievement
 {
-    public function handle(object $event): void
+    public function handle(CommentWritten $event): void
     {
-        /* @var Comment $comment */
         $comment = $event->comment;
 
         $user = $comment->user;

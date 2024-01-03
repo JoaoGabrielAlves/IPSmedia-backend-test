@@ -6,10 +6,11 @@ use App\Actions\GetNextAvailableAchievement;
 use App\Enums\AchievementCategoryEnum;
 use App\Models\Badge;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 
 class AchievementsController extends Controller
 {
-    public function index(User $user)
+    public function index(User $user): JsonResponse
     {
         $unlockedAchievements = $user
             ->unlockedAchievements
@@ -28,7 +29,7 @@ class AchievementsController extends Controller
 
         $currentBadge = $user->badge;
 
-        $currentBadgeRequirement = $currentBadge->requirement;
+        $currentBadgeRequirement = $currentBadge?->requirement;
 
         $nextBadge = Badge::query()
             ->where('requirement', '>', $currentBadgeRequirement)
@@ -45,7 +46,7 @@ class AchievementsController extends Controller
                 $nextAvailableCommentAchievement?->name,
                 $nextAvailableLessonWatchedAchievement?->name,
             ])),
-            'current_badge' => $user->badge->name,
+            'current_badge' => $user->badge?->name,
             'next_badge' => $nextBadge?->name,
             'remaining_to_unlock_next_badge' => $remainingToUnlockNextBadge,
         ]);

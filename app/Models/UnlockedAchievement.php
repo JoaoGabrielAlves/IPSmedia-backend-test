@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Actions\UnlockAchievement;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -34,11 +35,17 @@ class UnlockedAchievement extends Model
 {
     protected $guarded = [];
 
+    /**
+     * @return BelongsTo<User,UnlockedAchievement>
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+/**
+     * @return BelongsTo<Achievement,UnlockedAchievement>
+     */
     public function achievement(): BelongsTo
     {
         return $this->belongsTo(Achievement::class);
